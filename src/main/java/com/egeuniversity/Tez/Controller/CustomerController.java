@@ -20,7 +20,7 @@ public class CustomerController {
 
     @GetMapping("/getTest")
     public String getTest(){
-        return "test";
+        return "test1";
     }
 
     @GetMapping("/get")
