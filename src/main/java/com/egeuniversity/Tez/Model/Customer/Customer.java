@@ -21,5 +21,8 @@ public class Customer extends BaseEntity<Integer, Customer> {
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "SURNAME")
+    private String surname;
+
 
 }
