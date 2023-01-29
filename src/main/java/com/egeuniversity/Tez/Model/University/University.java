@@ -1,10 +1,12 @@
 package com.egeuniversity.Tez.Model.University;
 
+import com.egeuniversity.Tez.Model.Customer.Customer;
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -29,6 +31,4 @@ public class University extends BaseEntity<Integer, University> implements Seria
 
     @Column(name = "ADDRESS")
     private String address;
-
-
 }

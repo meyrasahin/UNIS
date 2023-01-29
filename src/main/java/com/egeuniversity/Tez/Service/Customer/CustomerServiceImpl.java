@@ -1,24 +1,43 @@
 package com.egeuniversity.Tez.Service.Customer;
 
 import com.egeuniversity.Tez.Model.Customer.Customer;
+import com.egeuniversity.Tez.Model.Customer.CustomerRequestDto;
+import com.egeuniversity.Tez.Model.University.University;
 import com.egeuniversity.Tez.Repository.Customer.CustomerRepository;
-import com.egeuniversity.Tez.Service.Generic.BaseEntityServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.egeuniversity.Tez.Repository.University.UniversityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
-public class CustomerServiceImpl extends BaseEntityServiceImpl<Integer, Customer> implements CustomerService {
+@RequiredArgsConstructor
+public class CustomerServiceImpl implements CustomerService {
 
-    private CustomerRepository customerRepo;
-
-    @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepo) {
-        super(customerRepo);
-        this.customerRepo = customerRepo;
+    private final CustomerRepository customerRepository;
+    private final UniversityRepository universityRepository;
+    @Override
+    public Customer findByName(String name) {
+        return null;
     }
 
     @Override
-    public Customer findByName(String name) {
-        return customerRepo.getOne(1);
+    public Customer addCustomer(CustomerRequestDto customerRequestDto) {
+        return customerRepository.save(assembleAddCustomer(customerRequestDto));
     }
+
+    private Customer assembleAddCustomer(CustomerRequestDto customerRequestDto) {
+        Optional<University> university = universityRepository.findById(customerRequestDto.getUniversityId());
+        return Customer.builder()
+                .username(customerRequestDto.getUsername())
+                .password(customerRequestDto.getPassword())
+                .name(customerRequestDto.getName())
+                .surname(customerRequestDto.getSurname())
+                .address(customerRequestDto.getAddress())
+                .phone(customerRequestDto.getPhone())
+                .university(university.get())
+                .build();
+
+    }
+
 }

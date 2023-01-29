@@ -1,21 +1,21 @@
 package com.egeuniversity.Tez.Controller;
 
+import com.egeuniversity.Tez.Model.Customer.CustomerRequestDto;
 import com.egeuniversity.Tez.Service.Customer.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequiredArgsConstructor
 public class CustomerController {
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
-
-    @Autowired
-    public CustomerController(CustomerService customerService) {
-        super();
-        this.customerService = customerService;
+    @PostMapping(path = "/customer/addCustomers")
+    public ResponseEntity<Void> addCustomer(@RequestBody CustomerRequestDto customerRequestDto) {
+        customerService.addCustomer(customerRequestDto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/getTest")
