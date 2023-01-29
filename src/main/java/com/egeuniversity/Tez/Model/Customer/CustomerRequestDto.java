@@ -2,7 +2,6 @@ package com.egeuniversity.Tez.Model.Customer;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
 @Data
