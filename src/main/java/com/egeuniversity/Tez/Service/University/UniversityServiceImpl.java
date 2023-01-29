@@ -4,7 +4,6 @@ import com.egeuniversity.Tez.Model.University.University;
 import com.egeuniversity.Tez.Model.University.UniversityRequestDto;
 import com.egeuniversity.Tez.Repository.University.UniversityRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
