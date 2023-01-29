@@ -1,9 +1,10 @@
 package com.egeuniversity.Tez.Model.Customer;
 
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
+import com.egeuniversity.Tez.Model.University.University;
 import lombok.*;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
@@ -12,17 +13,36 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Customer extends BaseEntity<Integer, Customer> {
+@Builder
+public class Customer extends BaseEntity<Integer, Customer> implements Serializable {
+    private static final long serialVersionUID = 9065665507358663524L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="ID")
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "USERNAME")
+    private String username;
+
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "SURNAME")
     private String surname;
+
+    @Column(name = "PHONE")
+    private String phone;
+
+    @Column(name = "ADDRESS")
+    private String address;
+
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = University.class)
+    @JoinColumn(name = "UNIVERSITY")
+    private University university;
+
 
 
 }
