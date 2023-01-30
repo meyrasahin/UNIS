@@ -10,4 +10,5 @@ public interface UniversityService {
     University addUniversity(UniversityRequestDto universityRequestDto);
     List<University> getAllUniversity();
     void deleteUniversity(Integer id);
+    University get(Integer id);
 }

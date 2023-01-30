@@ -15,7 +15,7 @@ public class ProductRequestDTO implements Serializable {
 
     private String name;
     private String imageUrl;
-    private String price;
+    private double price;
     private Integer universityId;
     private Integer featuresId;
 }

@@ -35,7 +35,7 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
     private String imageUrl;
 
     @Column(name = "PRICE")
-    private String price;
+    private double price;
 
     @OneToOne(fetch = FetchType.EAGER, targetEntity = University.class)
     @JoinColumn(name = "UNIVERSITY")
