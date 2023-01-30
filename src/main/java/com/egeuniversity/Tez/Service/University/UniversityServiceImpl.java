@@ -34,4 +34,9 @@ public class UniversityServiceImpl implements UniversityService{
     public void deleteUniversity(Integer id) {
         universityRepository.deleteById(id);
     }
+
+    @Override
+    public University get(Integer id) {
+        return universityRepository.get(id);
+    }
 }
