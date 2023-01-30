@@ -1,6 +1,8 @@
 package com.egeuniversity.Tez.Model.Product;
 
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
+import com.egeuniversity.Tez.Model.Product.Category.Category;
+import com.egeuniversity.Tez.Model.Product.Features.ProductFeatures;
 import com.egeuniversity.Tez.Model.University.University;
 import lombok.*;
 
@@ -27,7 +29,7 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = ProductFeatures.class)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ProductFeatures.class)
     @JoinColumn(name = "FEATURES")
     private ProductFeatures features;
 
@@ -41,6 +43,8 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
     @JoinColumn(name = "UNIVERSITY")
     private University university;
 
-    // hiyerarsik kategori yapisi eklenecek
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
+    @JoinColumn(name = "CATEGORY")
+    private Category category;
 
 }

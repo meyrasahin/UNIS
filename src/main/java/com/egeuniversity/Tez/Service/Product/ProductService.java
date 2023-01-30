@@ -1,5 +1,6 @@
 package com.egeuniversity.Tez.Service.Product;
 
+import com.egeuniversity.Tez.Model.Product.Category.CategoryRequestDTO;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.Product.ProductRequestDTO;
 
@@ -11,4 +12,5 @@ public interface ProductService {
     void deleteProduct(Integer id);
     List<Product> listProductsByUniversity(Integer universityId);
     Product updateProduct();
+    void addCategory(CategoryRequestDTO categoryRequestDTO);
 }
