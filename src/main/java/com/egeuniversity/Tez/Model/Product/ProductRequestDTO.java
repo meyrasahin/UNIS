@@ -1,5 +1,6 @@
 package com.egeuniversity.Tez.Model.Product;
 
+import com.egeuniversity.Tez.Model.Product.Features.ProductFeaturesRequestDTO;
 import lombok.*;
 
 import java.io.Serializable;
@@ -17,5 +18,6 @@ public class ProductRequestDTO implements Serializable {
     private String imageUrl;
     private double price;
     private Integer universityId;
-    private Integer featuresId;
+    private ProductFeaturesRequestDTO featuresRequest;
+    private Integer categoryId;
 }

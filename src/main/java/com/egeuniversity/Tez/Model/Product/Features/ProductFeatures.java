@@ -1,4 +1,4 @@
-package com.egeuniversity.Tez.Model.Product;
+package com.egeuniversity.Tez.Model.Product.Features;
 
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import lombok.*;
