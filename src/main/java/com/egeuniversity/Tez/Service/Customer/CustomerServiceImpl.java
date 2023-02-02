@@ -16,14 +16,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final UniversityRepository universityRepository;
-    @Override
-    public Customer findByName(String name) {
-        return null;
-    }
 
     @Override
     public Customer addCustomer(CustomerRequestDto customerRequestDto) {
         return customerRepository.save(assembleAddCustomer(customerRequestDto));
+    }
+
+    @Override
+    public Customer getById(Integer id) {
+        return customerRepository.get(id);
     }
 
     private Customer assembleAddCustomer(CustomerRequestDto customerRequestDto) {

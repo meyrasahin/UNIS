@@ -18,13 +18,4 @@ public class CustomerController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/getTest")
-    public String getTest(){
-        return "test1";
-    }
-
-    @GetMapping("/get")
-    public String getByName(){
-        return customerService.findByName("meyra").getName();
-    }
 }
