@@ -26,4 +26,27 @@ public class CartController {
         cartService.createCart(cartRequestDTO);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping(path= "/deleteLineItem")
+    public Cart deleteCartLineItem(@RequestBody Integer id) {
+        Cart cart = cartService.deleteCartLineItem(id);
+        return cart;
+    }
+
+    @PutMapping(path = "/updateQuantity")
+    public Cart updateQuantity(@RequestParam Integer cartLineItemId, @RequestParam String operation){
+        Cart cart = null;
+        switch (operation){
+            case "decrease":
+                cart = cartService.decreaseQuantity(cartLineItemId);
+                break;
+            case "increase":
+                cart = cartService.increaseQuantity(cartLineItemId);
+                break;
+        }
+
+        return cart;
+    }
+
+
 }

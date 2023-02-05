@@ -7,6 +7,7 @@ import com.egeuniversity.Tez.Model.Cart.CartLineItem.CartLineItemRequestDTO;
 import com.egeuniversity.Tez.Model.Customer.Customer;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.University.University;
+import com.egeuniversity.Tez.Repository.Cart.CartLineItemRepository;
 import com.egeuniversity.Tez.Repository.Cart.CartRepository;
 import com.egeuniversity.Tez.Service.Customer.CustomerService;
 import com.egeuniversity.Tez.Service.Product.ProductService;
@@ -24,6 +25,7 @@ import java.util.List;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final CartLineItemRepository cartLineItemRepository;
 
     private final UniversityService universityService;
     private final CustomerService customerService;
@@ -39,6 +41,56 @@ public class CartServiceImpl implements CartService {
         Cart cart = assembleCreateCart(cartRequestDTO);
         cart.getLineItems().forEach((item) -> item.setCart(cart));
         return cartRepository.save(cart);
+    }
+
+    @Override
+    public void deleteCart(Cart cart) {
+        cartRepository.delete(cart);
+    }
+
+    @Override
+    public Cart deleteCartLineItem(Integer id) {
+        CartLineItem lineItem = cartLineItemRepository.get(id);
+        Cart cart = lineItem.getCart();
+        cart.getLineItems().remove(lineItem);
+        cartRepository.save(cart);
+
+        cart = updateCartQuantity(lineItem);
+        cartLineItemRepository.deleteById(id);
+
+        return cart;
+    }
+
+    @Override
+    public Cart decreaseQuantity(Integer cartLineItemId) {
+        CartLineItem lineItem = cartLineItemRepository.get(cartLineItemId);
+        lineItem.setQuantity(lineItem.getQuantity() - 1);
+        lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
+        lineItem.setDateUpdated(new Date());
+        cartLineItemRepository.save(lineItem);
+
+        return updateCartQuantity(lineItem);
+    }
+
+    @Override
+    public Cart increaseQuantity(Integer cartLineItemId) {
+        CartLineItem lineItem = cartLineItemRepository.get(cartLineItemId);
+        lineItem.setQuantity(lineItem.getQuantity() + 1);
+        lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
+        lineItem.setDateUpdated(new Date());
+        cartLineItemRepository.save(lineItem);
+
+        return updateCartQuantity(lineItem);
+    }
+
+    private Cart updateCartQuantity(CartLineItem lineItem){
+        Cart cart = lineItem.getCart();
+        double totalPrice = cart.getLineItems().stream().mapToDouble(CartLineItem::getLinePrice).sum();
+        cart.setDateUpdated(new Date());
+        cart.setTotalPrice(totalPrice);
+        cartRepository.save(cart);
+
+        return cart;
     }
 
     private Cart assembleCreateCart(CartRequestDTO cartRequestDTO){
