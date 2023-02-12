@@ -1,10 +1,13 @@
 package com.egeuniversity.Tez.Model.Customer;
 
+import com.egeuniversity.Tez.Model.Address.Address;
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import com.egeuniversity.Tez.Model.University.University;
 import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -36,13 +39,11 @@ public class Customer extends BaseEntity<Integer, Customer> implements Serializa
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "ADDRESS")
-    private String address;
-
     @OneToOne(fetch = FetchType.EAGER, targetEntity = University.class)
     @JoinColumn(name = "UNIVERSITY")
     private University university;
 
-
+    @OneToMany(fetch=FetchType.EAGER)
+    private List<Address> addresses = new ArrayList<>();
 
 }
