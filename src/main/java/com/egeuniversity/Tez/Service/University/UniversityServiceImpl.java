@@ -1,8 +1,10 @@
 package com.egeuniversity.Tez.Service.University;
 
+import com.egeuniversity.Tez.Model.Address.Address;
 import com.egeuniversity.Tez.Model.University.University;
 import com.egeuniversity.Tez.Model.University.UniversityRequestDto;
 import com.egeuniversity.Tez.Repository.University.UniversityRepository;
+import com.egeuniversity.Tez.Service.Address.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class UniversityServiceImpl implements UniversityService{
 
     private final UniversityRepository universityRepository;
+    private final AddressService addressService;
 
     @Override
     public University addUniversity(UniversityRequestDto universityRequestDto) {
@@ -20,10 +23,11 @@ public class UniversityServiceImpl implements UniversityService{
     }
 
     public University assembleAddUniversity(UniversityRequestDto universityRequestDto) {
+        Address address = addressService.assembleAddress(universityRequestDto.getAddressRequestDTO());
         return University.builder()
                 .universityName(universityRequestDto.getUniversityName())
-                .address(universityRequestDto.getAddress())
                 .phone(universityRequestDto.getPhone())
+                .address(address)
                 .build();
     }
     @Override

@@ -1,5 +1,6 @@
 package com.egeuniversity.Tez.Model.University;
 
+import com.egeuniversity.Tez.Model.Address.Address;
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class University extends BaseEntity<Integer, University> implements Seria
     @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "ADDRESS")
-    private String address;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Address.class)
+    @JoinColumn(name = "ADDRESS")
+    private Address address;
 }
