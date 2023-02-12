@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+
     @Query("select p from Product as p where p.university.id=?1")
     List<Product> listByUniversity(Integer universityId);
 

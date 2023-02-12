@@ -8,4 +8,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("select c from Customer as c where c.id=?1")
     Customer get(Integer id);
 
+    @Query("select c from Customer as c where c.id=?1")
+    Customer getById(Integer id);
+
 }
