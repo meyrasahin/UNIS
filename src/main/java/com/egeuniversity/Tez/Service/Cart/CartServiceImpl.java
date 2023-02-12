@@ -7,6 +7,7 @@ import com.egeuniversity.Tez.Model.Cart.CartLineItem.CartLineItemRequestDTO;
 import com.egeuniversity.Tez.Model.Customer.Customer;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.University.University;
+import com.egeuniversity.Tez.Model.Utility.LocalDateTimeUtility;
 import com.egeuniversity.Tez.Repository.Cart.CartLineItemRepository;
 import com.egeuniversity.Tez.Repository.Cart.CartRepository;
 import com.egeuniversity.Tez.Service.Customer.CustomerService;
@@ -16,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +30,8 @@ public class CartServiceImpl implements CartService {
     private final UniversityService universityService;
     private final CustomerService customerService;
     private final ProductService productService;
+
+    private final LocalDateTimeUtility localDateTimeUtility;
 
     @Override
     public Cart getCart(Integer id) {
@@ -66,7 +68,7 @@ public class CartServiceImpl implements CartService {
         CartLineItem lineItem = cartLineItemRepository.get(cartLineItemId);
         lineItem.setQuantity(lineItem.getQuantity() - 1);
         lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
-        lineItem.setDateUpdated(new Date());
+        lineItem.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
         cartLineItemRepository.save(lineItem);
 
         return updateCartQuantity(lineItem);
@@ -77,7 +79,7 @@ public class CartServiceImpl implements CartService {
         CartLineItem lineItem = cartLineItemRepository.get(cartLineItemId);
         lineItem.setQuantity(lineItem.getQuantity() + 1);
         lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
-        lineItem.setDateUpdated(new Date());
+        lineItem.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
         cartLineItemRepository.save(lineItem);
 
         return updateCartQuantity(lineItem);
@@ -86,7 +88,7 @@ public class CartServiceImpl implements CartService {
     private Cart updateCartQuantity(CartLineItem lineItem){
         Cart cart = lineItem.getCart();
         double totalPrice = cart.getLineItems().stream().mapToDouble(CartLineItem::getLinePrice).sum();
-        cart.setDateUpdated(new Date());
+        lineItem.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
         cart.setTotalPrice(totalPrice);
         cartRepository.save(cart);
 
@@ -102,8 +104,8 @@ public class CartServiceImpl implements CartService {
         double totalPrice = lineItemList.stream().mapToDouble(CartLineItem::getLinePrice).sum();
 
         return Cart.builder()
-                .dateCreated(new Date())
-                .dateUpdated(new Date())
+                .createdAt(localDateTimeUtility.getCurrentDateTime())
+                .updatedAt(localDateTimeUtility.getCurrentDateTime())
                 .lineItems(lineItemList)
                 .university(university)
                 .customer(customer)
@@ -119,8 +121,8 @@ public class CartServiceImpl implements CartService {
             CartLineItem targetItem = CartLineItem.builder()
                     .quantity(item.getQuantity())
                     .product(product)
-                    .dateCreated(new Date())
-                    .dateUpdated(new Date())
+                    .createdAt(localDateTimeUtility.getCurrentDateTime())
+                    .updatedAt(localDateTimeUtility.getCurrentDateTime())
                     .linePrice(product.getPrice()*item.getQuantity())
                     .build();
 

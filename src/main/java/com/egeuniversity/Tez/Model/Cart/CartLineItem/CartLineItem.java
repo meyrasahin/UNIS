@@ -5,10 +5,12 @@ import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.Cart.Cart.Cart;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -27,11 +29,13 @@ public class CartLineItem extends BaseEntity<Integer, CartLineItem> implements S
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "DATE_CREATED")
-    private Date dateCreated;
+    @Column(name = "CREATED_AT", columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Column(name = "DATE_UPDATED")
-    private Date dateUpdated;
+    @Column(name = "UPDATED_AT", columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @Column(name="QUANTITY")
     private int quantity;

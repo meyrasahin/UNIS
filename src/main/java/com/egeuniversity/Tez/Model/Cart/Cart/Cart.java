@@ -5,10 +5,12 @@ import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import com.egeuniversity.Tez.Model.Cart.CartLineItem.CartLineItem;
 import com.egeuniversity.Tez.Model.University.University;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -28,11 +30,13 @@ public class Cart extends BaseEntity<Integer, Cart> implements Serializable {
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "DATE_CREATED")
-    private Date dateCreated;
+    @Column(name = "CREATED_AT", columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    @Column(name = "DATE_UPDATED")
-    private Date dateUpdated;
+    @Column(name = "UPDATED_AT", columnDefinition = "TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private List<CartLineItem> lineItems;
