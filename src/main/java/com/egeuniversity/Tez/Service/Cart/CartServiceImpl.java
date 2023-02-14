@@ -14,6 +14,8 @@ import com.egeuniversity.Tez.Service.Customer.CustomerService;
 import com.egeuniversity.Tez.Service.Product.ProductService;
 import com.egeuniversity.Tez.Service.University.UniversityService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class CartServiceImpl implements CartService {
     private final ProductService productService;
 
     private final LocalDateTimeUtility localDateTimeUtility;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartServiceImpl.class);
 
     @Override
     public Cart getCart(Integer id) {
@@ -41,8 +44,11 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart createCart(CartRequestDTO cartRequestDTO) {
         Cart cart = assembleCreateCart(cartRequestDTO);
-        cart.getLineItems().forEach((item) -> item.setCart(cart));
-        return cartRepository.save(cart);
+        if(cart != null){
+            cart.getLineItems().forEach((item) -> item.setCart(cart));
+            return cartRepository.save(cart);
+        }
+        return new Cart();
     }
 
     @Override
@@ -77,12 +83,19 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart increaseQuantity(Integer cartLineItemId) {
         CartLineItem lineItem = cartLineItemRepository.get(cartLineItemId);
-        lineItem.setQuantity(lineItem.getQuantity() + 1);
-        lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
-        lineItem.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
-        cartLineItemRepository.save(lineItem);
+        if(lineItem.getProduct().getStock() > lineItem.getQuantity() + 1){
+            lineItem.setQuantity(lineItem.getQuantity() + 1);
+            lineItem.setLinePrice(lineItem.getQuantity() * lineItem.getProduct().getPrice());
+            lineItem.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
+            cartLineItemRepository.save(lineItem);
 
-        return updateCartQuantity(lineItem);
+            return updateCartQuantity(lineItem);
+        }
+        else{
+            LOGGER.info("There is not enough stock for product id: " + lineItem.getProduct().getId());
+            return lineItem.getCart();
+        }
+
     }
 
     private Cart updateCartQuantity(CartLineItem lineItem){
@@ -101,16 +114,21 @@ public class CartServiceImpl implements CartService {
 
         List<CartLineItem> lineItemList = assembleCreateCartLineItem(cartRequestDTO.getLineItemsDTO());
 
-        double totalPrice = lineItemList.stream().mapToDouble(CartLineItem::getLinePrice).sum();
-
-        return Cart.builder()
-                .createdAt(localDateTimeUtility.getCurrentDateTime())
-                .updatedAt(localDateTimeUtility.getCurrentDateTime())
-                .lineItems(lineItemList)
-                .university(university)
-                .customer(customer)
-                .totalPrice(totalPrice)
-                .build();
+        if(lineItemList.size() != 0){
+            double totalPrice = lineItemList.stream().mapToDouble(CartLineItem::getLinePrice).sum();
+            return Cart.builder()
+                    .createdAt(localDateTimeUtility.getCurrentDateTime())
+                    .updatedAt(localDateTimeUtility.getCurrentDateTime())
+                    .lineItems(lineItemList)
+                    .university(university)
+                    .customer(customer)
+                    .totalPrice(totalPrice)
+                    .build();
+        }
+        else{
+            LOGGER.info("All line items are invalid for the cart.");
+            return null;
+        }
     }
 
     private List<CartLineItem> assembleCreateCartLineItem(List<CartLineItemRequestDTO> lineItemRequest){
@@ -118,15 +136,20 @@ public class CartServiceImpl implements CartService {
 
         for (CartLineItemRequestDTO item : lineItemRequest) {
             Product product = productService.getProduct(item.getProductId());
-            CartLineItem targetItem = CartLineItem.builder()
-                    .quantity(item.getQuantity())
-                    .product(product)
-                    .createdAt(localDateTimeUtility.getCurrentDateTime())
-                    .updatedAt(localDateTimeUtility.getCurrentDateTime())
-                    .linePrice(product.getPrice()*item.getQuantity())
-                    .build();
+            if(product.getStock() > item.getQuantity()){
+                CartLineItem targetItem = CartLineItem.builder()
+                        .quantity(item.getQuantity())
+                        .product(product)
+                        .createdAt(localDateTimeUtility.getCurrentDateTime())
+                        .updatedAt(localDateTimeUtility.getCurrentDateTime())
+                        .linePrice(product.getPrice()*item.getQuantity())
+                        .build();
 
-            targetList.add(targetItem);
+                targetList.add(targetItem);
+            }
+            else{
+                LOGGER.info("Product stock is not enough for this line item id:" + product.getId());
+            }
         }
 
         return targetList;

@@ -20,4 +20,5 @@ public class ProductRequestDTO implements Serializable {
     private Integer universityId;
     private ProductFeaturesRequestDTO featuresRequest;
     private Integer categoryId;
+    private Long stock;
 }
