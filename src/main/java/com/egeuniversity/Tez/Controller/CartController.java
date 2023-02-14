@@ -2,6 +2,7 @@ package com.egeuniversity.Tez.Controller;
 
 import com.egeuniversity.Tez.Model.Cart.Cart.Cart;
 import com.egeuniversity.Tez.Model.Cart.Cart.CartRequestDTO;
+import com.egeuniversity.Tez.Model.Cart.CartLineItem.CartLineItemRequestDTO;
 import com.egeuniversity.Tez.Service.Cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +47,9 @@ public class CartController {
         return cart;
     }
 
+    @PostMapping(path = "/addItem")
+    public Cart addCartLineItem(@RequestParam Integer cartId, @RequestBody CartLineItemRequestDTO requestDTO) {
+        return cartService.addCartLineItem(requestDTO, cartId);
+    }
 
 }

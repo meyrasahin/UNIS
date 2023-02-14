@@ -98,6 +98,23 @@ public class CartServiceImpl implements CartService {
 
     }
 
+    @Override
+    public Cart addCartLineItem(CartLineItemRequestDTO lineItemRequestDTO, Integer cartId) {
+        List<CartLineItemRequestDTO> source = new ArrayList<>();
+        source.add(lineItemRequestDTO);
+        List<CartLineItem> target = this.assembleCreateCartLineItem(source);
+
+        CartLineItem targetItem = target.get(0);
+        Cart cart = this.getCart(cartId);
+        targetItem.setCart(cart);
+        cartLineItemRepository.save(targetItem);
+
+        cart.getLineItems().add(targetItem);
+        cartRepository.save(cart);
+
+        return updateCartQuantity(target.get(0));
+    }
+
     private Cart updateCartQuantity(CartLineItem lineItem){
         Cart cart = lineItem.getCart();
         double totalPrice = cart.getLineItems().stream().mapToDouble(CartLineItem::getLinePrice).sum();
