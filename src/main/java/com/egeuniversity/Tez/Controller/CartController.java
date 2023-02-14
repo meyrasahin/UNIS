@@ -4,12 +4,11 @@ import com.egeuniversity.Tez.Model.Cart.Cart.Cart;
 import com.egeuniversity.Tez.Model.Cart.Cart.CartRequestDTO;
 import com.egeuniversity.Tez.Service.Cart.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/shoppingCart")
+@RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
@@ -22,9 +21,8 @@ public class CartController {
     }
 
     @PostMapping(path = "/create")
-    public ResponseEntity<Void> createShoppingCart(@RequestBody CartRequestDTO cartRequestDTO) {
-        cartService.createCart(cartRequestDTO);
-        return ResponseEntity.ok().build();
+    public Cart createShoppingCart(@RequestBody CartRequestDTO cartRequestDTO) {
+        return cartService.createCart(cartRequestDTO);
     }
 
     @DeleteMapping(path= "/deleteLineItem")

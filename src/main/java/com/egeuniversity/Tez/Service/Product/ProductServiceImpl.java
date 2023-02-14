@@ -69,6 +69,7 @@ public class ProductServiceImpl implements ProductService{
                 .university(university)
                 .features(persistableFeatures)
                 .category(category)
+                .stock(productRequestDTO.getStock())
                 .build();
     }
 

@@ -7,6 +7,7 @@ import com.egeuniversity.Tez.Model.University.University;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Data
@@ -38,6 +39,10 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
 
     @Column(name = "PRICE")
     private double price;
+
+    @NotNull
+    @Column(name = "STOCK")
+    private Long stock = 0L;
 
     @OneToOne(fetch = FetchType.EAGER, targetEntity = University.class)
     @JoinColumn(name = "UNIVERSITY")
