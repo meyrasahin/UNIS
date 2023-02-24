@@ -33,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
 
     private Order assembleAddOrder(OrderRequestDto orderRequestDto) {
         List<OrderLineItem> orderLineItemList = assembleOrderLineItem(orderRequestDto.getOrderLineItemRequest());
+
     return Order.builder()
             .totalPrice(
                     orderLineItemList
@@ -69,7 +70,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDto deleteOrder(Integer id) {
-        orderRepository.delete(orderRepository.getById(id));
+        Order order = orderRepository.getById(id);
+        order.setOrderStatus(OrderStatus.DELETED);
+        order.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
+
         return OrderResponseDto.builder()
                 .orderStatus(OrderStatus.DELETED)
                 .situation("Sipariş silindi")

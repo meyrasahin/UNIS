@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getById(Integer id) {
-        return customerRepository.get(id);
+        return customerRepository.getById(id);
     }
 
     @Override
@@ -69,8 +69,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .addresses(new ArrayList<>())
                 .phone(customerRequestDto.getPhone())
                 .university(university)
+                .customerType(customerRequestDto.getCustomerType())
                 .build();
-
     }
-
 }
