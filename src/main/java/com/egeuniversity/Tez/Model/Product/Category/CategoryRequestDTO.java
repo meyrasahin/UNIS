@@ -14,6 +14,6 @@ public class CategoryRequestDTO implements Serializable {
     private static final long serialVersionUID = -8531369407328328057L;
 
     private String name;
-    private Integer parentCategoryId;
+    private Integer rank;
 
 }
