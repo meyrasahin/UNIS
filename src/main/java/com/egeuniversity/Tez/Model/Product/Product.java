@@ -9,6 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,9 +31,8 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = ProductFeatures.class)
-    @JoinColumn(name = "FEATURES")
-    private ProductFeatures features;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<ProductFeatures> features;
 
     @Column(name = "IMG_URL")
     private String imageUrl;

@@ -26,8 +26,6 @@ public class Category extends BaseEntity<Integer, Category> implements Serializa
     @Column(name = "NAME")
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
-    @JoinColumn(name = "PARENT_CATEGORY", nullable = true)
-    private Category parentCategory;
-
+    @Column(name = "RANK")
+    private Integer rank;
 }
