@@ -64,7 +64,7 @@ public class OrderServiceImpl implements OrderService {
                     .customer(customerRepository.getById(orderRequestDto.getCustomerId()))
                     .build();
         }
-        else{
+        else {
             LOGGER.info("All line items are invalid for the order.");
             return null;
         }
@@ -101,7 +101,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDto deleteOrder(Integer id) {
-        orderRepository.delete(orderRepository.getById(id));
+        Order order = orderRepository.getById(id);
+        order.setOrderStatus(OrderStatus.DELETED);
+        order.setUpdatedAt(localDateTimeUtility.getCurrentDateTime());
+
         return OrderResponseDto.builder()
                 .orderStatus(OrderStatus.DELETED)
                 .situation("Sipariş silindi")
