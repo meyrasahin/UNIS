@@ -26,13 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into Category (name, parent_Category) values (:name, :parent_Category)", nativeQuery = true)
-    void saveCategory(@Param("name") String name, @Param("parent_Category") Integer parent_Category);
-
-    @Modifying
-    @Transactional
-    @Query(value = "insert into Category (name, parent_Category) values (:name, null)", nativeQuery = true)
-    void saveRootCategory(@Param("name") String name);
+    @Query(value = "insert into Category (name, rank) values (:name, :rank)", nativeQuery = true)
+    void saveCategory(@Param("name") String name, @Param("rank") Integer rank);
 
     @Modifying
     @Transactional

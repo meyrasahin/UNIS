@@ -1,6 +1,8 @@
 package com.egeuniversity.Tez.Model.Product.Features;
 
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
+import com.egeuniversity.Tez.Model.Product.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,23 +25,21 @@ public class ProductFeatures extends BaseEntity<Integer, ProductFeatures> implem
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "COLOR")
-    private String color;
+    @Column(name = "NAME")
+    private String name;
 
-    @Column(name = "SIZE")
-    private String size;
+    @Column(name = "VALUE")
+    private String value;
 
-    // kumas bilgisi
-    @Column(name = "MATERIAL")
-    private String material;
+    @Column(name = "HIGHLIGHTED")
+    private boolean highlighted;
 
-    // giysi boynu bilgisi
-    @Column(name = "NECKLINE")
-    private String neckline;
+    @JsonIgnore
+    @ManyToOne(targetEntity = Product.class)
+    @JoinColumn(name = "PRODUCT", nullable = false)
+    private Product product;
 
-    // giysi kolu bilgisi
-    @Column(name = "SLEEVE")
-    private String sleeveLength;
+    // color - size - material - neckline - sleeve
 
 
 }
