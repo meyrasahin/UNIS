@@ -2,15 +2,21 @@ package com.egeuniversity.Tez.Controller;
 
 import com.egeuniversity.Tez.Model.Cart.Cart.Cart;
 import com.egeuniversity.Tez.Model.Cart.Cart.CartRequestDTO;
+import com.egeuniversity.Tez.Model.Cart.CartLineItem.CartLineItemRequestDTO;
 import com.egeuniversity.Tez.Service.Cart.CartService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+
+@Named
+@ViewScoped
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/shoppingCart")
-public class CartController {
+@RequestMapping("/cart")
+public class CartController implements Serializable {
 
     private final CartService cartService;
 
@@ -22,9 +28,8 @@ public class CartController {
     }
 
     @PostMapping(path = "/create")
-    public ResponseEntity<Void> createShoppingCart(@RequestBody CartRequestDTO cartRequestDTO) {
-        cartService.createCart(cartRequestDTO);
-        return ResponseEntity.ok().build();
+    public Cart createShoppingCart(@RequestBody CartRequestDTO cartRequestDTO) {
+        return cartService.createCart(cartRequestDTO);
     }
 
     @DeleteMapping(path= "/deleteLineItem")
@@ -48,5 +53,9 @@ public class CartController {
         return cart;
     }
 
+    @PostMapping(path = "/addItem")
+    public Cart addCartLineItem(@RequestParam Integer cartId, @RequestBody CartLineItemRequestDTO requestDTO) {
+        return cartService.addCartLineItem(requestDTO, cartId);
+    }
 
 }
