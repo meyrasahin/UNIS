@@ -9,13 +9,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@Named
+@ViewScoped
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/customer")
-public class CustomerController {
+public class CustomerController implements Serializable {
     private final CustomerService customerService;
 
     @PostMapping(path = "/create")
