@@ -8,12 +8,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
+@Named
+@ViewScoped
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/product")
-public class ProductController {
+public class ProductController implements Serializable {
     private final ProductService productService;
 
     @PostMapping(path = "/addProduct")

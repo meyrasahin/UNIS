@@ -7,12 +7,18 @@ import com.egeuniversity.Tez.Service.Order.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
+@Named
+@ViewScoped
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/order")
-public class OrderController {
+public class OrderController implements Serializable {
     private final OrderService orderService;
 
     @PostMapping("/add")
