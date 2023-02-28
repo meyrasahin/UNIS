@@ -42,7 +42,7 @@ public class TezApplication {
 	public ServletContextInitializer servletContextInitializer() {
 		return servletContext -> {
 			servletContext.setInitParameter("com.sun.faces.forceLoadConfiguration", Boolean.TRUE.toString());
-			servletContext.setInitParameter("primefaces.THEME", "nova-light");
+			servletContext.setInitParameter("primefaces.THEME", "omega");
 		};
 	}
 
