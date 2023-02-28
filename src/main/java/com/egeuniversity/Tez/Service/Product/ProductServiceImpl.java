@@ -3,6 +3,7 @@ package com.egeuniversity.Tez.Service.Product;
 import com.egeuniversity.Tez.Model.Product.Category.Category;
 import com.egeuniversity.Tez.Model.Product.Category.CategoryRequestDTO;
 import com.egeuniversity.Tez.Model.Product.Features.ProductFeaturesRequestDTO;
+import com.egeuniversity.Tez.Model.Product.Gender;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.Product.Features.ProductFeatures;
 import com.egeuniversity.Tez.Model.Product.ProductRequestDTO;
@@ -74,6 +75,7 @@ public class ProductServiceImpl implements ProductService{
                 .features(features)
                 .category(category)
                 .stock(productRequestDTO.getStock())
+                .gender(Gender.valueOf(productRequestDTO.getGender().toUpperCase()))
                 .build();
     }
 

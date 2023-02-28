@@ -52,4 +52,6 @@ public class Product extends BaseEntity<Integer, Product> implements Serializabl
     @JoinColumn(name = "CATEGORY")
     private Category category;
 
+    @Column(name = "GENDER")
+    private Gender gender;
 }

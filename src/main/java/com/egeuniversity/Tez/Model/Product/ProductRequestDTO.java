@@ -22,4 +22,5 @@ public class ProductRequestDTO implements Serializable {
     private List<ProductFeaturesRequestDTO> featuresRequest;
     private Integer categoryId;
     private Long stock;
+    private String gender;
 }
