@@ -46,4 +46,7 @@ public class Customer extends BaseEntity<Integer, Customer> implements Serializa
     @OneToMany(fetch=FetchType.EAGER)
     private List<Address> addresses = new ArrayList<>();
 
+    @Column(name = "CUSTOMER_TYPE")
+    private CustomerType customerType;
+
 }

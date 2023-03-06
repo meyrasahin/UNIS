@@ -4,6 +4,7 @@ import com.egeuniversity.Tez.Model.Product.Features.ProductFeaturesRequestDTO;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Getter
@@ -18,7 +19,8 @@ public class ProductRequestDTO implements Serializable {
     private String imageUrl;
     private double price;
     private Integer universityId;
-    private ProductFeaturesRequestDTO featuresRequest;
+    private List<ProductFeaturesRequestDTO> featuresRequest;
     private Integer categoryId;
     private Long stock;
+    private String gender;
 }

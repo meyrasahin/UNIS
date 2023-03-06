@@ -19,4 +19,5 @@ public class CustomerRequestDto implements Serializable {
     private String surname;
     private String phone;
     private Integer universityId;
+    private CustomerType customerType;
 }

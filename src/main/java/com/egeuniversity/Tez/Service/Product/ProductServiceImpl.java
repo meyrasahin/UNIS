@@ -3,6 +3,7 @@ package com.egeuniversity.Tez.Service.Product;
 import com.egeuniversity.Tez.Model.Product.Category.Category;
 import com.egeuniversity.Tez.Model.Product.Category.CategoryRequestDTO;
 import com.egeuniversity.Tez.Model.Product.Features.ProductFeaturesRequestDTO;
+import com.egeuniversity.Tez.Model.Product.Gender;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.Product.Features.ProductFeatures;
 import com.egeuniversity.Tez.Model.Product.ProductRequestDTO;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,6 +27,7 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product addProduct(ProductRequestDTO productRequestDTO) {
         Product product = assembleAddProduct(productRequestDTO);
+        product.getFeatures().forEach(item -> item.setProduct(product));
         return productRepository.save(product);
     }
 
@@ -52,42 +55,42 @@ public class ProductServiceImpl implements ProductService{
     @Transactional
     public void addCategory(CategoryRequestDTO categoryRequestDTO) {
         Category persistableCategory = assembleAddCategory(categoryRequestDTO);
-        if (persistableCategory.getParentCategory() == null)
-            productRepository.saveRootCategory(persistableCategory.getName());
-        else
-            productRepository.saveCategory(persistableCategory.getName(), persistableCategory.getParentCategory().getId());
+        productRepository.saveCategory(persistableCategory.getName(), persistableCategory.getRank());
     }
 
     private Product assembleAddProduct(ProductRequestDTO productRequestDTO){
         University university = universityService.get(productRequestDTO.getUniversityId());
         Category category = productRepository.getCategory(productRequestDTO.getCategoryId());
-        ProductFeatures persistableFeatures = assembleAddFeatures(productRequestDTO.getFeaturesRequest());
+
+        List<ProductFeatures> features = new ArrayList<>();
+        productRequestDTO.getFeaturesRequest().forEach(req -> {
+            features.add(assembleAddFeatures(req));
+        });
+
         return Product.builder()
                 .name(productRequestDTO.getName())
                 .imageUrl(productRequestDTO.getImageUrl())
                 .price(productRequestDTO.getPrice())
                 .university(university)
-                .features(persistableFeatures)
+                .features(features)
                 .category(category)
                 .stock(productRequestDTO.getStock())
+                .gender(Gender.valueOf(productRequestDTO.getGender().toUpperCase()))
                 .build();
     }
 
     private Category assembleAddCategory(CategoryRequestDTO categoryRequestDTO){
-        Category parentCategory = productRepository.getCategory(categoryRequestDTO.getParentCategoryId());
         return Category.builder()
                 .name(categoryRequestDTO.getName())
-                .parentCategory(parentCategory)
+                .rank(categoryRequestDTO.getRank())
                 .build();
     }
 
     private ProductFeatures assembleAddFeatures(ProductFeaturesRequestDTO featuresRequestDTO){
         return ProductFeatures.builder()
-                .color(featuresRequestDTO.getColor())
-                .size(featuresRequestDTO.getSize())
-                .neckline(featuresRequestDTO.getNeckline())
-                .sleeveLength(featuresRequestDTO.getSleeveLength())
-                .material(featuresRequestDTO.getMaterial())
+                .name(featuresRequestDTO.getName())
+                .value(featuresRequestDTO.getValue())
+                .highlighted(featuresRequestDTO.isHighlighted())
                 .build();
     }
 }

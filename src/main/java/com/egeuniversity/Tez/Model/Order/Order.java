@@ -1,5 +1,6 @@
 package com.egeuniversity.Tez.Model.Order;
 
+import com.egeuniversity.Tez.Model.Address.Address;
 import com.egeuniversity.Tez.Model.Customer.Customer;
 import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import lombok.*;
@@ -49,6 +50,10 @@ public class Order extends BaseEntity<Integer, Order> implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, targetEntity = Customer.class)
     @JoinColumn(name = "CUSTOMER")
     private Customer customer;
+
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Address.class)
+    @JoinColumn(name = "ADDRESS")
+    private Address address;
 
     /*
     @OneToOne(fetch = FetchType.EAGER, targetEntity = Invoice.class)

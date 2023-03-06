@@ -7,10 +7,16 @@ import com.egeuniversity.Tez.Service.Cart.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+
+@Named
+@ViewScoped
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cart")
-public class CartController {
+public class CartController implements Serializable {
 
     private final CartService cartService;
 
