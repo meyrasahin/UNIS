@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>UNIS</title>
@@ -296,64 +297,7 @@
 <h:body>
 
     <!-- Header -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 100px">
-        <div class="container-fluid justify-content-between">
-            <!-- Left elements -->
-            <div class="d-flex">
-                <a class="navbar-brand" href="#">
-                    <span><i class="fas fa-align-justify fa-lg"></i></span>
-                </a>
-                <!-- Brand -->
-                <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#"><img src="./images/UNIS.png" alt=""/>
-                </a>
-
-            </div>
-            <!-- Left elements -->
-
-            <!-- Center elements -->
-            <ul class="navbar-nav flex-row d-none d-md-flex">
-                <li class="nav-item me-3 me-lg-1 active">
-                    <a class="nav-link" href="#">
-                        <span><i class="fas fa-camera fa-lg"></i></span>
-                    </a>
-                </li>
-
-                <li class="nav-item me-3 me-lg-1">
-                    <div class="input-group" style="margin-top: 5px">
-                        <div class="form-outline">
-                            <input type="search" id="form1" class="form-control" placeholder="Search" style="border-radius: 100px" />
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item me-3 me-lg-1 active">
-                    <a class="nav-link" href="#">
-                        <span><i class="fas fa-search fa-lg"></i></span>
-                    </a>
-                </li>
-            </ul>
-            <!-- Center elements -->
-
-            <!-- Right elements -->
-            <ul class="navbar-nav flex-row">
-                <li class="nav-item me-3 me-lg-1">
-                    <a class="nav-link d-sm-flex align-items-sm-center" href="#">
-                        <span><i class="fas fa-envelope mx-1"></i>Contact</span>
-                    </a>
-                </li>
-                <li class="nav-item me-3 me-lg-1">
-                    <a class="nav-link" href="#">
-                        <span><i class="fas fa-user mx-1"></i>GİRİŞ YAP</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown me-3 me-lg-1">
-                    <a class="nav-link" href="#">
-                        <span><i class="fas fa-shopping-bag"></i></span>
-                    </a>
-                </li>
-            </ul>
-            <!-- Right elements -->
-        </div>
-    </nav>
+    <ui:include src = "header.xhtml" />
     <!-- Header -->
 
     <!-- Welcome -->
@@ -638,43 +582,9 @@
     </div>
     <!-- Categories Slider -->
     <hr/>
-    <footer>
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-3 follow" style="text-align: center">
-                    <h5 class="me-0">Bizi Takip Edin!</h5>
-                    <ul class="list-inline mb-0 mt-3">
-                        <li class="list-inline-item">
-                            <i class="fab fa-fw fa-facebook-f"></i>
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fab fa-fw fa-instagram"></i>
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fab fa-fw fa-twitter"></i>
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fab fa-fw fa-youtube"></i>
-                        </li>
-                        <li class="list-inline-item">
-                            <i class="fab fa-fw fa-linkedin-in"></i>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-6"></div>
-                <div class="col-lg-3 contact" style="text-align: center">
-                    <h5 class="mb-0">Contact</h5>
-                    <p class="mb-0">Toll free:
-                        <span class="h6 fw-light ms-2">+1234 568 963</span>
-                        <span class="d-block small">(9:AM to 8:PM IST)</span>
-                    </p>
-                    <p class="mb-0">Email:
-                        <span class="h6 fw-light ms-2">example@gmail.com</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer -->
+    <ui:include src = "footer.xhtml" />
+    <!-- Footer -->
 
     <script>
         $(document).ready(function(){

@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>UNIS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"/>
+</h:head>
+<h:body>
+    <!-- Header -->
+    <ui:include src = "header.xhtml" />
+    <!-- Header -->
+    <section class="breadcrumbs bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">KADIN</li>
+                            <li class="breadcrumb-item active" aria-current="page">T-SHIRT</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <!-- Title -->
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h5 class="fs-1">KADIN T-SHIRT</h5>
+                </div>
+            </div>
+
+            <!-- Tabs START -->
+            <ul class="nav nav-pills nav-pills-bg-soft justify-content-sm-center mb-4 px-3" id="course-pills-tab" role="tablist">
+                <!-- Tab item -->
+                <li class="nav-item me-2 me-sm-5" role="presentation">
+                    <button class="nav-link mb-2 mb-md-0 active" id="course-pills-tab-1" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-1" type="button" role="tab" aria-controls="course-pills-tabs-1" aria-selected="true">TÜMÜ</button>
+                </li>
+                <!-- Tab item -->
+                <li class="nav-item me-2 me-sm-5" role="presentation">
+                    <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-2" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-2" type="button" role="tab" aria-controls="course-pills-tabs-2" aria-selected="false" tabindex="-1">KISA KOLLU</button>
+                </li>
+                <!-- Tab item -->
+                <li class="nav-item me-2 me-sm-5" role="presentation">
+                    <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-3" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-3" type="button" role="tab" aria-controls="course-pills-tabs-3" aria-selected="false" tabindex="-1">UZUN KOLLU</button>
+                </li>
+                <!-- Tab item -->
+                <li class="nav-item me-2 me-sm-5" role="presentation">
+                    <button class="nav-link mb-2 mb-md-0" id="course-pills-tab-4" data-bs-toggle="pill" data-bs-target="#course-pills-tabs-4" type="button" role="tab" aria-controls="course-pills-tabs-4" aria-selected="false" tabindex="-1">BASIC ÜRÜNLER</button>
+                </li>
+            </ul>
+            <!-- Tabs END -->
+
+            <!-- Tabs content START -->
+            <div class="tab-content" id="course-pills-tabContent">
+                <!-- Content START -->
+                <div class="tab-pane fade show active" id="course-pills-tabs-1" role="tabpanel" aria-labelledby="course-pills-tab-1">
+                    <div class="row g-4">
+
+                        <!-- Card item START -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <div class="card shadow h-100">
+                                <!-- Image -->
+                                <img src="./images/tshirt-black.jpg" class="card-img-top" alt="course image"/>
+                                <!-- Card body -->
+                                <div class="card-body pb-0">
+                                    <!-- Badge and favorite -->
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <a href="#" class="h6 mb-0"><i class="far fa-heart"></i></a>
+                                    </div>
+                                    <!-- Title -->
+                                    <h5 class="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
+                                    <p class="mb-2 text-truncate-2">Proposal indulged no do sociable he throwing settling.</p>
+                                    <!-- Rating star -->
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
+                                        <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li>
+                                    </ul>
+                                </div>
+                                <!-- Card footer -->
+                                <div class="card-footer pt-0 pb-3">
+                                    <hr/>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>12h 56m</span>
+                                        <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>15 lectures</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+
+                    </div> <!-- Row END -->
+                </div>
+                <!-- Content END -->
+
+                <!-- Content START -->
+                <div class="tab-pane fade" id="course-pills-tabs-2" role="tabpanel" aria-labelledby="course-pills-tab-2">
+                    <div class="row g-4">
+                        <!-- Card item START -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <div class="card shadow h-100">
+                                <!-- Image -->
+                                <img src="assets/images/courses/4by3/05.jpg" class="card-img-top" alt="course image"/>
+                                <div class="card-body pb-0">
+                                    <!-- Badge and favorite -->
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <a href="#" class="badge bg-success bg-opacity-10 text-success">Beginner</a>
+                                        <a href="#" class="h6 fw-light mb-0"><i class="far fa-heart"></i></a>
+                                    </div>
+                                    <!-- Title -->
+                                    <h5 class="card-title fw-normal"><a href="#">The Complete Web Development in python</a></h5>
+                                    <p class="text-truncate-2 mb-2">Mention Mr manners opinion if garrets enabled.</p>
+                                    <!-- Rating star -->
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                                        <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
+                                    </ul>
+                                </div>
+                                <!-- Card footer -->
+                                <div class="card-footer pt-0 pb-3">
+                                    <hr/>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>10h 00m</span>
+                                        <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>26 lectures</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+                </div>
+                <!-- Content END -->
+
+                <!-- Content START -->
+                <div class="tab-pane fade" id="course-pills-tabs-3" role="tabpanel" aria-labelledby="course-pills-tab-3">
+                    <div class="row g-4">
+                        <!-- Card item START -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <div class="card shadow h-100">
+                                <!-- Image -->
+                                <img src="assets/images/courses/4by3/08.jpg" class="card-img-top" alt="course image"/>
+                                <div class="card-body pb-0">
+                                    <!-- Badge and favorite -->
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <a href="#" class="badge bg-purple bg-opacity-10 text-purple">All level</a>
+                                        <a href="#" class="h6 fw-light mb-0"><i class="far fa-heart"></i></a>
+                                    </div>
+                                    <!-- Title -->
+                                    <h5 class="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
+                                    <p class="text-truncate-2 mb-2">Proposal indulged no do sociable he throwing settling</p>
+                                    <!-- Rating star -->
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="far fa-star text-warning"></i></li>
+                                        <li class="list-inline-item ms-2 h6 fw-light mb-0">4.0/5.0</li>
+                                    </ul>
+                                </div>
+                                <!-- Card footer -->
+                                <div class="card-footer pt-0 pb-3">
+                                    <hr/>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>12h 56m</span>
+                                        <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>15 lectures</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+                </div>
+                <!-- Content END -->
+
+                <!-- Content START -->
+                <div class="tab-pane fade" id="course-pills-tabs-4" role="tabpanel" aria-labelledby="course-pills-tab-4">
+                    <div class="row g-4">
+                        <!-- Card item START -->
+                        <div class="col-sm-6 col-lg-4 col-xl-3">
+                            <div class="card shadow h-100">
+                                <!-- Image -->
+                                <img src="assets/images/courses/4by3/01.jpg" class="card-img-top" alt="course image"/>
+                                <div class="card-body pb-0">
+                                    <!-- Badge and favorite -->
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <a href="#" class="badge bg-success bg-opacity-10 text-success">Beginner</a>
+                                        <a href="#" class="text-danger"><i class="fas fa-heart"></i></a>
+                                    </div>
+                                    <!-- Title -->
+                                    <h5 class="card-title fw-normal"><a href="#">Digital Marketing Masterclass</a></h5>
+                                    <p class="text-truncate-2 mb-2">Delivered dejection necessary objection do Mr prevailed.</p>
+                                    <!-- Rating star -->
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
+                                        <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
+                                        <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
+                                    </ul>
+                                </div>
+                                <!-- Card footer -->
+                                <div class="card-footer pt-0 pb-3">
+                                    <hr/>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="h6 fw-light mb-0"><i class="far fa-clock text-danger me-2"></i>6h 56m</span>
+                                        <span class="h6 fw-light mb-0"><i class="fas fa-table text-orange me-2"></i>82 lectures</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card item END -->
+                    </div>
+                </div>
+                <!-- Content END -->
+
+            </div>
+            <!-- Tabs content END -->
+        </div>
+    </section>
+    <!-- Footer -->
+    <ui:include src = "footer.xhtml" />
+    <!-- Footer -->
+
+</h:body>
+</html>
