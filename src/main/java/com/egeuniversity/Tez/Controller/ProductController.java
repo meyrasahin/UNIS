@@ -4,7 +4,9 @@ import com.egeuniversity.Tez.Model.Product.Category.CategoryRequestDTO;
 import com.egeuniversity.Tez.Model.Product.Product;
 import com.egeuniversity.Tez.Model.Product.ProductRequestDTO;
 import com.egeuniversity.Tez.Service.Product.ProductService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,8 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+@Getter
+@Setter
 @Named
 @ViewScoped
 @RestController
@@ -20,6 +24,8 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController implements Serializable {
     private final ProductService productService;
+
+    List<Product> products;
 
     @PostMapping(path = "/addProduct")
     public ResponseEntity<Void> addProduct(@RequestBody ProductRequestDTO productRequestDTO) {
@@ -38,7 +44,8 @@ public class ProductController implements Serializable {
     @ResponseBody
     public List<Product> listByUni(@RequestParam Integer id){
         List<Product> productList = productService.listProductsByUniversity(id);
-        return productList;
+        products = productList;
+        return null;
     }
 
     @DeleteMapping(path= "/delete")
