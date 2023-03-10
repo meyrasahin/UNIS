@@ -58,6 +58,11 @@ public class ProductServiceImpl implements ProductService{
         productRepository.saveCategory(persistableCategory.getName(), persistableCategory.getRank());
     }
 
+    @Override
+    public List<Category> getCategories() {
+        return productRepository.getCategories();
+    }
+
     private Product assembleAddProduct(ProductRequestDTO productRequestDTO){
         University university = universityService.get(productRequestDTO.getUniversityId());
         Category category = productRepository.getCategory(productRequestDTO.getCategoryId());

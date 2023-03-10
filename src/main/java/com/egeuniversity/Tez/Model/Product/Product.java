@@ -4,6 +4,7 @@ import com.egeuniversity.Tez.Model.Generic.BaseEntity;
 import com.egeuniversity.Tez.Model.Product.Category.Category;
 import com.egeuniversity.Tez.Model.Product.Features.ProductFeatures;
 import com.egeuniversity.Tez.Model.University.University;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;

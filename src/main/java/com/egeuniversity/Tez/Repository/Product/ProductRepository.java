@@ -37,4 +37,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("select pf from ProductFeatures as pf where pf.id=?1")
     ProductFeatures getFeatures(Integer id);
 
+    @Query("select c from Category as c")
+    List<Category> getCategories();
+
 }

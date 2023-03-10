@@ -18,11 +18,18 @@
             <div class="container-fluid justify-content-between">
                 <!-- Left elements -->
                 <div class="d-flex">
-                    <a class="navbar-brand" href="#">
-                        <span><i class="fas fa-align-justify fa-lg"></i></span>
-                    </a>
+
+                        <p:sidebar widgetVar="categories">
+                            <h3>Left Sidebar</h3>
+                            <p:repeat value="#{homeController.categories}" var="category">
+                                <br/>
+                                <a href="plp.xhtml" action="#{productController.listByUni(1)}" id="category-#{category.id}">#{category.name}</a>
+                            </p:repeat>
+                        </p:sidebar>
+
+                    <p:commandButton onclick="PF('categories').show()" styleClass="rounded-button mr-2 fas fa-solid fa-bars fa-lg text-dark " style="border:none; background: none" value=""/>
                     <!-- Brand -->
-                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="#"><img src="./images/UNIS.png" alt=""/>
+                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="home.xhtml"><img src="./images/UNIS.png" alt=""/>
                     </a>
 
                 </div>
