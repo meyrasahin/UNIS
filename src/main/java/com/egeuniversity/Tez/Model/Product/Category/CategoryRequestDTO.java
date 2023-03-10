@@ -15,5 +15,6 @@ public class CategoryRequestDTO implements Serializable {
 
     private String name;
     private Integer rank;
+    private String coverImg;
 
 }

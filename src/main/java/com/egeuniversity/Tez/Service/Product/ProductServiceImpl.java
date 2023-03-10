@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService{
     @Transactional
     public void addCategory(CategoryRequestDTO categoryRequestDTO) {
         Category persistableCategory = assembleAddCategory(categoryRequestDTO);
-        productRepository.saveCategory(persistableCategory.getName(), persistableCategory.getRank());
+        productRepository.saveCategory(persistableCategory.getName(), persistableCategory.getRank(), persistableCategory.getCoverImage());
     }
 
     @Override
@@ -88,6 +88,7 @@ public class ProductServiceImpl implements ProductService{
         return Category.builder()
                 .name(categoryRequestDTO.getName())
                 .rank(categoryRequestDTO.getRank())
+                .coverImage(categoryRequestDTO.getCoverImg())
                 .build();
     }
 
