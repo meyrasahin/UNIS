@@ -26,8 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into Category (name, rank) values (:name, :rank)", nativeQuery = true)
-    void saveCategory(@Param("name") String name, @Param("rank") Integer rank);
+    @Query(value = "insert into Category (name, rank, coverImage) values (:name, :rank, :coverImage)", nativeQuery = true)
+    void saveCategory(@Param("name") String name, @Param("rank") Integer rank, @Param("coverImage") String coverImage);
 
     @Modifying
     @Transactional

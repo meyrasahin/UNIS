@@ -28,4 +28,7 @@ public class Category extends BaseEntity<Integer, Category> implements Serializa
 
     @Column(name = "RANK")
     private Integer rank;
+
+    @Column(name = "COVER_IMAGE")
+    private String coverImage;
 }
